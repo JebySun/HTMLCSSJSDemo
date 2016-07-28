@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>测试模板</title>
+		<script type="text/javascript">
+		window.onload = function runApp()
+		{
+			setColor("#FFFFFF");
+		}
+		
+		function setColor(color)
+		{
+			if(color)
+			{
+				document.body.style.backgroundColor = color;
+			}	
+			//IE获取的是形如#FFFFFF的字符串值,FireFox和谷歌浏览器获取的是形如rgb(255,255,255)的字符串值
+			var bgColor = document.body.style.backgroundColor;
+			document.body.style.backgroundColor = colorFactory(bgColor);
+			setTimeout("setColor()", 100);
+		}
+		
+		function colorFactory(color)
+		{
+			color = parseInt(color.substr(1), 16);
+			color = color-17;
+			color = color.toString(16);
+			var n = 6-color.length;
+			for(var i=0; i<n; i++)
+			{
+				color = "0"+color;
+			}
+			return "#"+color;
+		} 
+		</script>
+	</head>
+	
+	<body>
+	</body>
+</html>
+

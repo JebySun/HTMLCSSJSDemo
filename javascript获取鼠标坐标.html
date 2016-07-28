@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>测试模板</title>
+		<style type="text/css">
+			#test{
+				margin:0 auto;
+				width:600px;
+				height:400px;
+				background-color:blue;
+			} 
+		</style>
+		<script type="text/javascript">
+		 function editTxt(e){
+			alert("X="+e.clientX+",Y="+e.clientY); 
+		 }
+		</script>
+	</head>
+	
+	<body>
+	<div id="test" onclick="editTxt(event)"></div>
+	</body>
+</html>
+

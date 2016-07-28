@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>window.open</title>
+	<script type="text/javascript">
+		function myWindow_open()
+		{
+			window.open("http://www.baidu.com");	
+		}
+		
+		function myWindow_openWithArgs()
+		{
+			window.open("http://www.baidu.com", "", "width=600,height=400,location=no,status=no,titlebar=no,scrollbars=no");	
+		}
+		
+		function myWindow_showModalDialog()
+		{
+			window.showModalDialog("http://www.baidu.com"); 	
+		}
+		
+		function myWindow_showModalDialogWithArgs()
+		{
+			window.showModalDialog("http://www.baidu.com", "status=no,scroll=no,center=no"); 	
+		}
+	</script>
+</head>
+
+<body>
+	window.open()
+	<hr/>
+	<a href="javascript:myWindow_open()">window.open</a><br/>
+	<a href="javascript:myWindow_openWithArgs()">window.openWithArgs</a><br/>
+	<a href="javascript:myWindow_showModalDialog()">window.showModalDialog</a><br/>
+	<a href="javascript:myWindow_showModalDialogWithArgs()">window.showModalDialogWithArgs</a><br/>
+	
+</body>
+</html>

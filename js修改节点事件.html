@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>测试模板</title>
+		<script type="text/javascript">
+		 function editTxt(){
+			 var s = "Hi<1544848>llo";
+			 var v = s.replace(/<\d+>/,"");
+			 alert(v);
+		 }
+		 
+		 function removeEvent(){
+		 	 	document.getElementById("btn").onclick = null;
+		 }
+		</script>
+	</head>
+	
+	<body>
+	<input id="btn" type="button" value="运行" onclick="editTxt()"/>
+	<input id="b" type="button" value="移除事件" onclick="removeEvent()"/>
+	</body>
+</html>
+

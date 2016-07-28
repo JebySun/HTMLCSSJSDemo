@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>测试模板</title>
+		<script type="text/javascript">
+			/**
+			 * 打开模态窗口
+			 */
+			function openModalWindow()
+			{
+				var url = document.getElementById("url").value;
+				modalWindow(url, "模态窗口", "500px", "300px");
+			}
+			
+			/**
+			 * 模态窗口初始化
+			 */
+			function modalWindow(url, title, width, height) 
+			{				
+				var body = document.getElementsByTagName("body")[0];
+				var backDiv = createBackDIV();
+				var modalDiv = createModalDIV(url, title, width, height);
+				body.appendChild(backDiv);
+				body.appendChild(modalDiv);	
+			}
+			/**
+			 * div构造函数
+			 */
+			function Div(id, width, height, bgColor) {
+				var div = document.createElement("div");
+				div.setAttribute("id",id);
+				div.style.width = width;
+				div.style.height = height;
+				div.style.backgroundColor = bgColor;
+				return div;
+			}
+			/**
+			 * 创建遮罩层
+			 */
+			function createBackDIV(){
+				
+				var docWidth = document.body.scrollWidth;
+				var docHeight = document.body.scrollHeight;
+				var div = new Div("bgDiv",docWidth+"px", docHeight+"px", "#000000");
+				div.style.position = "fixed";
+				div.style.left = "0px";
+				div.style.top = "0px";
+				div.style.zIndex = 998;		
+				div.style.filter = "progid:DXImageTransform.Microsoft.Alpha(style=3,opacity=50,finishOpacity=50)";
+				div.style.opacity = 0.5;
+				return div;
+			}
+			
+			/**
+			 * 创建模态窗口
+			 */
+			function createModalDIV(url, title, width, height){
+				var winWidth = document.documentElement.clientWidth;
+				var winHeight = document.documentElement.clientHeight;
+				var hasScrollTop = document.documentElement.scrollTop;
+				var div = new Div("modalDiv", width, height,"#FFFFFF");
+				div.style.position = "fixed";
+				div.style.zIndex = 999;		
+				div.style.left = (winWidth - parseInt(div.style.width))/2+"px";
+				div.style.top = (winHeight-parseInt(div.style.height))/2+hasScrollTop+"px";
+				div.style.overflow = "hidden";
+				div.appendChild(createIFrame(url));
+				return div;
+			}
+			/**
+			 * 创建iframe
+			 */
+			function createIFrame(url) {
+				var iframe = document.createElement("iframe");
+				iframe.src = url;
+				iframe.width = "100%"
+				iframe.height = "100%";
+				iframe.style.overflow = "hidden";
+				return iframe;
+			}
+
+		</script>
+	</head>
+	
+	<body>
+	<h1>输入网页地址，用模态窗口打开。<h2/>
+	<input id="url" type="text" value="http://www.baidu.com"/>
+	<input type="button" value="打开模态窗口" onclick="openModalWindow()"/>
+	<div style="height:2000px;background-color:green;font-size:80px;">
+		网页内容
+	</div>
+	</body>
+</html>
+

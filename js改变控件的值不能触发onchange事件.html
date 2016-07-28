@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>测试模板</title>
+		<script type="text/javascript">
+		 function editTxt(){
+        document.getElementById("txt").value = "Sun";
+		 }
+		 
+		 function onChangeEvent(){
+		 	 	document.getElementsByTagName("div")[0].innerHTML = "div";
+		 }
+		</script>
+	</head>
+	
+	<body>
+		<input id="txt" type="text" value="Hi" onchange="onChangeEvent()"/>
+	  <input id="btn" type="button" value="修改" onclick="editTxt()"/>
+	  <div><div>
+	</body>
+</html>
+

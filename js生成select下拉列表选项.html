@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>测试模板</title>
+		<script type="text/javascript">
+		 function editTxt(){
+				alert("OK");
+		 }
+		 function initSelect(){
+		 		var s = document.getElementById("s");
+				var o;
+				for(var i=1900; i<=2040; i++) {
+			  	o = document.createElement("option");
+					o.setAttribute("value", i);
+					o.innerHTML = i;
+					s.appendChild(o);
+			  }
+		 }
+		</script>
+	</head>
+	
+	<body onload="initSelect()">
+	<input type="button" value="运行" onclick="editTxt()"/>
+	<br/>
+	<select id="s">
+	</select>
+	</body>
+</html>
+

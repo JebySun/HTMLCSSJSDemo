@@ -1,0 +1,98 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>测试模板</title>
+		<script type="text/javascript">
+		window.onload = function() {
+			document.getElementById("butn").onclick = function() {
+				var pop = new PopWindow("购买提示", "你确认购买这些商品吗？", "500px", "300px");
+				pop.showPop();
+			}
+		}
+
+		/**
+		 * 模态窗口类
+		 */
+		function PopWindow(title, info, width, height) {
+			this.title = title;
+			this.info = info;
+			this.width = width;
+			this.height = height;
+			this.window = this._createWindow();
+			this.titleBar = this._drawTitleBar();
+			this.infoZone = this._createInfoZone();
+			this.colseButton = this._createCloseButton();
+			this._drawCover();
+		}
+		PopWindow.prototype._drawCover = function() {
+			var node = document.createElement("div");
+			var rootNode = document.getElementsByTagName("body")[0];
+			rootNode.style.margin = "0px";
+			rootNode.style.padding = "0px";
+			node.style.width = "100%";
+			node.style.height = "100%";
+			node.style.backgroundColor = "#999999";
+			node.style.position = "absolute";
+			node.style.zIndex = 999;
+			node.style.top = "0px";
+			node.style.left = "0px";
+			rootNode.appendChild(node);
+		}
+		PopWindow.prototype._drawTitleBar = function() {
+			var node = document.createElement("span");
+			node.style.display = "block";
+			node.style.width = this.width;
+			node.style.height = "25px";
+			node.style.backgroundColor = "#CCCCCC";
+			node.innerHTML = this.title;
+			return node;
+		}
+		PopWindow.prototype._createCloseButton = function() {
+			var node = document.createElement("span");
+			node.style.display = "block";
+			node.style.width = "25px";
+			node.style.height = "25px";
+			node.style.float = "right";
+			node.style.backgroundColor = "#CCCCCC";
+			node.innerHTML = "×";
+			return node;
+		}
+
+		PopWindow.prototype._createInfoZone = function() {
+			var node = document.createElement("div");
+			node.style.width = this.width;
+			node.style.height = parseInt(this.height)-parseInt(this.titleBar.style.height)+"px";
+			node.style.backgroundColor = "#CCFFCC";
+			node.innerHTML = this.info;
+			return node;
+		}
+		PopWindow.prototype._createWindow = function() {
+			var node = document.createElement("div");
+			node.style.width = this.width;
+			node.style.height = this.height;
+			node.style.backgroundColor = "#FFFFFF";
+			node.style.border = "1px solid #0000FF";
+			node.style.position = "absolute";
+			node.style.zIndex = 1000;
+			node.style.top = "100px";
+			node.style.left = "300px";
+			return node;
+		}
+		PopWindow.prototype.showPop = function() {
+			var rootNode = document.getElementsByTagName("body")[0];
+			rootNode.appendChild(this.window);
+			this.window.appendChild(this.titleBar);
+			this.window.appendChild(this.infoZone);
+			this.titleBar.appendChild(this.colseButton);
+
+		}
+
+
+		</script>
+	</head>
+	
+	<body>
+		<input id="butn" type="button" value="运行"/>
+	</body>
+</html>
+

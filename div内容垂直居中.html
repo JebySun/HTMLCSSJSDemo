@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>测试模板</title>
+		<style type="text/css">
+			div{
+				border: 1px #000000 solid;
+			}
+			#singleLine{
+				width:800px;
+				height:200px;
+				line-height:200px;
+			}
+			#multiLine{
+				width:400px;
+				height:300px;
+				overflow:hidden;
+				position:relative;
+			}
+			#multiLine[id]{
+				display:table;
+				position:static;
+			}
+			#middle{
+				position:absolute;
+				top:50%;
+			} 
+			#middle[id]{
+				display:table-cell;
+				vertical-align:middle;
+				position:static;
+			}
+			#inner{
+				position:relative;
+				top:-50%;
+			}
+		
+			#inner[id]{
+				position:static;
+			}
+			
+		</style>
+	</head>
+	
+	<body>
+		<h1>单行：</h1>
+		<div id="singleLine">
+			单行内容垂直居中比较简单，设置div的高度和文本行高一样高就行了，即height = line-height
+		</div>
+		<h1>多行：</h1>
+		<div id="multiLine">
+			<div id="middle" style="border:none;">
+				<div id="inner" style="border:none;">	多行的情况比较复杂，需要3个div嵌套实现，建议新手不必去深究，套用即可。多行的情况比较复杂，需要3个div嵌套实现，建议新手不必去深究，套用即可。多行的情况比较复杂，需要3个div嵌套实现，建议新手不必去深究，套用即可。(IE9正常，IE8下异常)
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+

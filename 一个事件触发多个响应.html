@@ -1,0 +1,19 @@
+<html>
+<body>
+<input type="button" id="button_test" value="测试" />
+<script type="text/javascript">
+	function addEventHandler(target, type, func) {
+	    if (target.addEventListener)
+	        target.addEventListener(type, func, false);
+	    else if (target.attachEvent)
+	        target.attachEvent("on" + type, func);
+	    else target["on" + type] = func;
+	}
+
+addEventHandler(document.getElementById("button_test"), "click", function () { alert(1); });
+addEventHandler(document.getElementById("button_test"), "click", function () { alert(2); });
+</script>
+<hr/>
+一个事件触发多个响应可以通过js使用attachEvent实现，也可以直接在标签事件属性后调用多个方法，用逗号或者分号分隔。
+</body>
+</html>

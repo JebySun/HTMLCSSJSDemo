@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>测试模板</title>
+		<script type="text/javascript">
+		 (function(){
+			   var nullStr = "";
+			   var nul = null;
+			   var undef = undefined;
+			   if(!nullStr){
+			 	 		 alert("空字符串在布尔环境下被转换为false");
+				 } else {
+				 		 alert("空字符串在布尔环境下被转换为true");
+				 }
+
+				 if(!nul){
+			 	 		 alert("null在布尔环境下被转换为false");
+				 } else {
+				 		 alert("null在布尔环境下被转换为true");
+				 }
+				 alert(9+nul-4);          //期望结果为5.
+			 	 alert("HI!"+nul);
+			 	 		 
+				 if(!undef){
+			 	 		 alert("undefined在布尔环境下转换为false");
+				 } else {
+				 		 alert("undefined在布尔环境下被转换为true");
+				 }
+				 alert(9+undef-4);        //期望结果为NaN.
+			 	 alert("HI!"+undef);
+
+		 })();
+		</script>
+	</head>
+	
+	<body>
+		空字符串，null，undefined在数字，布尔，字符串环境下的转换
+		<ul>
+			<li>空字符串在布尔环境下转换为false，注意：如果该空字符串有空格等字符，则为true.</li>
+			<li>null在数字环境下转换为0.布尔环境下转换为false，字符串环境下转换为字符串null.</li>
+			<li>undefined在数字环境下转换为NaN，布尔环境下转换为false,字符串环境下转换为字符串undefined.</li>
+		</ul>
+	</body>
+</html>
+

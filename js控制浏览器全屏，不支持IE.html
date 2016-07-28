@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>javascript启用全屏</title>
+  <style type="text/css">
+  body{
+background:#fff;
+}
+button{
+ border:1px solid #ccc;
+ cursor:pointer;
+  display:block;
+  margin:auto;
+  position:relative;
+  top:100px;
+}
+.fullScreen{
+ padding-top:10%;
+ text-align:center;
+ background: none repeat scroll 0 0 #FFFFFF;
+}
+/* Mozilla proposal (dash) */
+.fullScreen:full-screen {
+    width:100%;
+    height:100%;
+}
+/* W3C proposal (no dash) */
+.fullScreen:fullscreen {
+    width:100%;
+    height:100%;
+}
+/* currently working vendor prefixes */
+.fullScreen:-webkit-full-screen, .fullScreen:-moz-full-screen {
+    width:100%;
+    height:100%;
+}
+:-webkit-full-screen{
+width:100%;
+    height:100%;
+}
+  </style>
+
+<script type="text/javascript"src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+ <script>
+ (function () {
+ var fullScreenApi = {
+  supportsFullScreen : false,
+  isFullScreen : function () {
+   return false;
+  },
+  requestFullScreen : function () {},
+  cancelFullScreen : function () {},
+  fullScreenEventName : '',
+  prefix : ''
+ },
+ browserPrefixes = 'webkit moz o ms khtml'.split(' ');
+ // check for native support
+ if (typeof document.cancelFullScreen != 'undefined') {
+  fullScreenApi.supportsFullScreen = true;
+ } else {
+  // check for fullscreen support by vendor prefix
+  for (var i = 0, il = browserPrefixes.length; i < il; i++) {
+   fullScreenApi.prefix = browserPrefixes[i];
+   if (typeof document[fullScreenApi.prefix + 'CancelFullScreen'] != 'undefined') {
+    fullScreenApi.supportsFullScreen = true;
+    break;
+   }
+  }
+ }
+ // update methods to do something useful
+ if (fullScreenApi.supportsFullScreen) {
+  fullScreenApi.fullScreenEventName = fullScreenApi.prefix + 'fullscreenchange';
+  fullScreenApi.isFullScreen = function () {
+   switch (this.prefix) {
+   case '':
+    return document.fullScreen;
+   case 'webkit':
+    return document.webkitIsFullScreen;
+   default:
+    return document[this.prefix + 'FullScreen'];
+   }
+  }
+  fullScreenApi.requestFullScreen = function (el) {
+   return (this.prefix === '') ? el.requestFullScreen() : el[this.prefix + 'RequestFullScreen']();
+  }
+  fullScreenApi.cancelFullScreen = function (el) {
+   return (this.prefix === '') ? document.cancelFullScreen() : document[this.prefix + 'CancelFullScreen']();
+  }
+ }
+ // jQuery plugin
+ if (typeof jQuery != 'undefined') {
+  jQuery.fn.requestFullScreen = function () {
+   return this.each(function () {
+    if (fullScreenApi.supportsFullScreen) {
+     fullScreenApi.requestFullScreen(this);
+    }
+   });
+  };
+ }
+ // export api
+ window.fullScreenApi = fullScreenApi;
+})();
+$(function(){
+ $("#fullScreenBtn").click(function(){
+  $("#fullScreen").requestFullScreen();
+ });
+
+ if(window.top != self){
+  $("#tip").text("iframe里面不能演示该功能！请点击右下角的全屏查看！").show();
+ }
+});
+if (!fullScreenApi.supportsFullScreen) {
+ alert("您的破浏览器不支持全屏API哦，请换高版本的chrome或者firebox！");
+}
+ </script>
+ 
+ </head>
+ <body>
+  <button id="fullScreenBtn">点击我进入全屏模式</button>
+  <div id="fullScreen" class="fullScreen">
+    <h1>
+     我是全屏区域的内容！
+   </h1>
+   <div id="tip" style="display:none;">
+
+   </div>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>测试模板</title>
+	</head>
+	<body>
+		<div id="div_container">图片加载中...</div>
+	</body>
+		<script type="text/javascript">
+			var img = new Image();
+			var container = document.getElementById("div_container");
+			img.src = "http://bizhi.zhuoku.com/2009/03/15/Titusboy/Meinv14.jpg";
+			setInterval(function(){
+				if(img.complete) {
+					container.innerHTML = "";
+					container.appendChild(img);
+				}
+			}, 200);
+
+		
+		</script>
+</html>
+

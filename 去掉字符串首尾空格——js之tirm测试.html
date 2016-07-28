@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<title>网页测试模板</title>
+		<script type="text/javascript">
+		 function editTxt(){
+			 var a = document.getElementById('txt').value;
+			 alert(typeof String.prototype.trim);
+		 }
+		</script>
+	</head>
+	
+	<body>
+	<input type="text" id="txt"/>
+	<input type="button" value="edit" onclick="editTxt()"/>
+	<hr />
+	经过测试，IE下并js没有trim方法.
+	</body>
+</html>
+

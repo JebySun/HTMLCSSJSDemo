@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>测试模板</title>
+		<script type="text/javascript">
+			function laterRun(){
+				setTimeout("myMethod('嘿嘿')", 2000);
+				document.getElementsByTagName("input")[0].value="...";
+			}
+			
+			function myMethod(a) {
+				document.getElementsByTagName("input")[0].value=a;
+			}
+			
+			function multThreadRun() {
+				setTimeout("myMethod('嘿嘿')", 0);
+				document.getElementsByTagName("input")[1].value="哈哈";
+			}
+			
+		</script>
+	</head>
+	
+	<body>
+	<input type="button" value="延迟运行" onclick="laterRun()"/>
+	<input type="button" value="多线程运行" onclick="multThreadRun()"/>
+	</body>
+</html>
+

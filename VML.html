@@ -1,0 +1,184 @@
+<HTML xmlns:v = "urn:schemas-microsoft-com:vml"><HEAD>
+<META NAME="Description" CONTENT="VML Animation - Stars"> 
+<META NAME="Keywords" CONTENT="stars,dhtml, vml, javascript, jscript, animation">
+<TITLE>VML Animation - Stars</TITLE>
+<OBJECT classid=CLSID:10072CEC-8CC1-11D1-986E-00A0C955B42E 
+id=VMLRender></OBJECT>
+<STYLE>v\:* {
+BEHAVIOR: url(#VMLRender)
+}
+</STYLE>
+
+</HEAD>
+<BODY bgColor=#ffffff onresize=resize() scroll=no>
+<v:rect id=bg
+style="HEIGHT:400pt;LEFT:0pt;POSITION:absolute;TOP:0pt;WIDTH:880pt;Z-INDEX:-1" 
+coordsize = "21600,21600"
+fillcolor = "#a8f4f7"
+strokecolor="#000000">
+<v:fill type = "gradient" 
+color2 = "#003159"
+angle = "45"
+focus = "100%"
+focusposition = ".5,.5"
+focussize = "0,0"
+method = "linear sigma">
+</v:fill>
+</v:rect>
+<script>
+
+//globals for HSV to RGB conversion
+irpnt=new Array(2,1,0,0,3,2);
+igpnt=new Array(3,2,2,1,0,0);
+ibpnt=new Array(0,0,3,2,2,1);
+//
+w=0;
+h=0;
+resize();
+scol=new colour(57,.61,.89);
+ss=new Array(50,90,75,50,60);
+vs="";
+for(j=0;j<ss.length;j++){
+np=3+rnd(6);
+sp=makestarpath(np,1000,900);
+hue=rnd(360);
+dhue=1+rnd(10);
+theta=0;
+dtheta=0.1+0.2*Math.random();
+dr=rnd(14)-6;if(dr==0)dr=-7;
+vx=rnd(10)-4;if(vx==0)vx=-5;
+vy=rnd(10)-4;if(vy==0)vy=-5;
+vs+="<v:shape id='V"+j+"' np="+np+" hue="+hue+" dhue="+dhue+" dr="+dr+" theta="+theta+" dtheta="+dtheta+" vx="+vx+" vy="+vy+" style='position:absolute;left:"+(6+rnd(w-ss[j]-12))+"px;top:"+(6+rnd(h-ss[j]-12))+"px;height:"+ss[j]+";width:"+ss[j]+";rotation:0;' fill='true' stroke='false' coordsize='2000,2000' coordorigin '0,0' fillcolor='#fdf9ae' strokeweight='2emu' path='"+sp+"'><v:fill type='gradientRadial' color2='#6f6022' angle='45' focus='100%' focusposition='.5,.5' focussize='2,2' method='linear sigma'></v:fill></v:shape>"
+}
+document.write(vs);
+
+window.setInterval("frame();",20);
+
+function frame(){
+for(j=0;j<ss.length;j++){
+S=document.all["V"+j];
+//animate colour
+hue=parseInt(S.hue);
+dhue=parseInt(S.dhue);
+hue+=dhue;
+if(hue>=360)hue-=360;
+S.hue=hue;
+scol.h=hue;
+scol.hsv2rgb();
+S.fillcolor=scol.rgb;
+//animate rotation
+r=parseInt(S.style.rotation);
+dr=parseInt(S.dr);
+r+=dr;if(r>=360)r-=360;if(r<0)r+=360;
+S.style.rotation=r;
+//animate geometry
+np=parseInt(S.np);
+theta=parseFloat(S.theta);
+dtheta=parseFloat(S.dtheta);
+theta+=dtheta;if(theta>Math.PI)theta-=2*Math.PI;
+sp=makestarpath(np,1000,200+1000*Math.sin(theta));
+S.path=sp;
+S.theta=theta;
+//move & bounce stars
+x=S.style.pixelLeft;
+y=S.style.pixelTop;
+vx=parseInt(S.vx);
+vy=parseInt(S.vy);
+x+=vx;
+y+=vy;
+if(x<0){vx=-vx;x+=vx;}
+if(x>w-ss[j]){vx=-vx;x=2*(w-ss[j])-x;}
+if(x>w-ss[j])x=0;
+if(x<0)x=0;
+if(y<0){vy=-vy;y+=vy;}
+if(y>h-ss[j]){vy=-vy;y=2*(h-ss[j])-y;}
+if(y>h-ss[j])y=0;
+if(y<0)y=0;
+S.style.pixelLeft=x;
+S.style.pixelTop=y;
+S.vx=vx;
+S.vy=vy;
+}
+}
+
+//n=number of points
+//r1=outer diameter
+//r2=inner diameter
+//assumes coordsize='2000,2000' coordorigin '0,0'
+function makestarpath(n,r1,r2){
+s="";
+pa=2*Math.PI/n;
+ss1=Math.PI/2;
+ss2=ss1-pa/2;
+x1=Math.floor(r1*Math.cos(ss1));
+y1=Math.floor(-r1*Math.sin(ss1));
+x2=Math.floor(r2*Math.cos(ss2));
+y2=Math.floor(-r2*Math.sin(ss2));
+s="m "+(x2+1000)+","+(y2+1000)+" l ";
+for (i=1;i<=n;i++){
+if(i>1)s+=","
+s+=(x1+1000)+","+(y1+1000)+",";
+s1=ss1+i*pa;
+s2=ss2+i*pa;
+x1=Math.floor(r1*Math.cos(s1));
+y1=Math.floor(-r1*Math.sin(s1));
+x2=Math.floor(r2*Math.cos(s2));
+y2=Math.floor(-r2*Math.sin(s2));
+s+=(x2+1000)+","+(y2+1000);
+}
+s+=" e"
+return(s);
+}
+
+function rnd(n){
+return(Math.floor((n+1)*Math.random()));
+}
+
+function resize(){
+w=document.body.clientWidth;
+h=document.body.clientHeight;
+bg.style.width=w;
+bg.style.height=h;
+}
+
+//utility object for HSV to RGB conversion
+function hsv2rgb(){
+pqvt=new Array(4);
+with(this){
+if(s==0){
+r=Math.floor(255*v);
+g=r;
+b=r;
+return;
+}
+if(h>=360)h=0;
+nh=h/60;
+i=Math.floor(nh);
+f=nh-i;
+pqvt[2]=255*v;
+pqvt[0]=pqvt[2]*(1-s)
+pqvt[1]=pqvt[2]*(1-s*f)
+pqvt[3]=pqvt[2]*(1-s*(1-f))
+r=Math.floor(pqvt[irpnt[i]]);
+g=Math.floor(pqvt[igpnt[i]]);
+b=Math.floor(pqvt[ibpnt[i]]);
+rgb="#"+(65536*r+256*g+b).toString(16);
+}
+}
+
+function colour(h,s,v){
+this.h=h; //0-359
+this.s=s; //0-1
+this.v=v; //0-1
+this.r=0; //0-255
+this.g=0; //0-255
+this.b=0; //0-255
+this.rgb="";
+this.hsv2rgb=hsv2rgb;
+//convert on construction
+this.hsv2rgb();
+}
+
+</script>
+
+</BODY></HTML>

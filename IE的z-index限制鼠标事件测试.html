@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>测试模板</title>
+		<style type="text/css">
+			div{position:absolute; width:200px;height:200px;}
+			#d1{top:100px; left:100px; background-color:red;}
+			#d2{top:150px; left:150px; background-color:blue; z-index:-1}
+		</style>
+		<script type="text/javascript">
+		 function test1(){
+			 alert("red");
+		 }
+		 function test2(){
+			 alert("blue");
+		 }
+		</script>
+	</head>
+	
+	<body>
+		<div id="d1"></div>
+		<div id="d2" onclick="test2()"></div>
+		<p>经过测试，IE对于z-index的处理和其他浏览器一样：z-index以0为分界点，并且z-index会后面块屏蔽鼠标事件</p>
+	</body>
+</html>
+

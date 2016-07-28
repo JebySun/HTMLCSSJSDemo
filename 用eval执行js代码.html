@@ -1,0 +1,20 @@
+﻿<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>测试模板</title>
+		<script type="text/javascript">
+		 function editTxt(){
+			 var txtAreaValue = document.getElementById("txt").value;
+			 eval(txtAreaValue);
+		 }
+		</script>
+	</head>
+	
+	<body>
+		试着在下面输入javascript代码，然后点击“执行”按钮
+		<textarea id="txt" style="width:100%; height:90%">
+		</textarea>
+	<input type="button" value="执行" onclick="editTxt()"/>
+	</body>
+</html>
+

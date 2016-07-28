@@ -1,0 +1,31 @@
+/* CSS Document */
+
+.box{
+	border:1px solid #FFFFFF;
+	width:100px;
+	height:100px;
+	float:left;
+	margin:10px;
+}
+#redbox{
+	background-color : #FF0000;
+}
+#greenbox{
+	background-color : #00FF00;
+}
+#bluebox{
+	background-color : #0000FF;
+}
+h3{
+	clear:left;
+}
+
+.red{
+	background-color : #FF0000;
+}
+.green{
+	background-color : #00FF00;
+}
+.blue{
+	background-color : #0000FF;
+}

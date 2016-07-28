@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>测试模板</title>
+		<script type="text/javascript">
+			function BaseClass(){ 
+				this.Hello=function(){ 
+					return this.Say(); 
+				} 
+			} 
+			function MyClassA(){ 
+				this.Say=function(){ 
+					return "Hello"; 
+				} 
+			} 
+			function MyClassB(){ 
+				this.Say=function(){ 
+					return "This is MyClassB"; 
+				} 
+			} 
+			MyClassA.prototype = new BaseClass(); 
+			MyClassB.prototype = new BaseClass(); 
+			var ObjA = new MyClassA(); 
+			var XX = ObjA.Hello(); 
+			alert(XX); //结果：Hello 
+			var ObjB = new MyClassB(); 
+			var YY = ObjB.Hello(); 
+			alert(YY); //结果：This is MyClassB 
+		</script>
+	</head>
+	
+	<body>
+	</body>
+</html>
+
